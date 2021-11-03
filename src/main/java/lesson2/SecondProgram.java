@@ -1,6 +1,6 @@
 package lesson2;
 
-public class FirstProgram {
+public class SecondProgram {
 
     int arg1, arg2;
 
