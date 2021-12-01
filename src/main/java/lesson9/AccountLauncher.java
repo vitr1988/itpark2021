@@ -6,7 +6,11 @@ import lesson9.implementation.PersonalAccount;
 public class AccountLauncher {
 
     public static void main(String[] args) {
-        Account account = new Account(""){ // анонимный класс
+        Account account = new Account("") { // анонимный класс
+            @Override
+            protected void printBalance() {
+
+            }
         };
         Account myAccount = new PersonalAccount("Ivanov Vitaly");
         myAccount.activated();
