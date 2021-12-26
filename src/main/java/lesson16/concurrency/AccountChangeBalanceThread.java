@@ -13,9 +13,12 @@ public class AccountChangeBalanceThread extends Thread {
     @Override
     public void run() {
         try {
-            account.deposit(new BigDecimal(2000));
-            Thread.sleep(1000);
-            account.deposit(new BigDecimal(2000));
+            synchronized (account) {
+                System.out.println("Осуществляем изменение баланса на счете из " + Thread.currentThread().getName());
+                account.deposit(new BigDecimal(2000));
+                Thread.sleep(1000);
+                account.deposit(new BigDecimal(2000));
+            }
             System.out.println("Текущее состояние счета: " + account.getBalance());
         } catch (InterruptedException e) {
             e.printStackTrace();

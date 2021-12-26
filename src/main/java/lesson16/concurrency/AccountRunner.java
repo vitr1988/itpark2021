@@ -8,10 +8,10 @@ public class AccountRunner {
         Account account = new Account();
         AccountIncrementThread accountIncrementThread = new AccountIncrementThread(account, new BigDecimal("10000"));
         accountIncrementThread.start();
-        accountIncrementThread.join();
+//        accountIncrementThread.join();
         AccountDecrementThread accountDecrementThread = new AccountDecrementThread(account, new BigDecimal("5000"));
         accountDecrementThread.start();
-        accountDecrementThread.join();
+//        accountDecrementThread.join();
         AccountChangeBalanceThread accountChangeBalanceThread = new AccountChangeBalanceThread(account);
         accountChangeBalanceThread.start();
     }

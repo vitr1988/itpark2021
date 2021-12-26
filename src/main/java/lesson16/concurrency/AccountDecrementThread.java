@@ -13,6 +13,10 @@ public class AccountDecrementThread extends Thread {
     }
 
     public void run() {
-        account.withdraw(value);
+        synchronized (account) {
+            System.out.println("Осуществляем снятие ДС со счета из " + Thread.currentThread().getName());
+            account.withdraw(value);
+            System.out.println("Текущее состояние счета: " + account.getBalance());
+        }
     }
 }
