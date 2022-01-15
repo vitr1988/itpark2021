@@ -13,6 +13,7 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <lombok.version>1.18.22</lombok.version>
         <commons-io.version>1.3.2</commons-io.version>
+        <commons-lang.version>2.5</commons-lang.version>
     </properties>
 
     <dependencies>
@@ -25,6 +26,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
         </dependency>
     </dependencies>
 
