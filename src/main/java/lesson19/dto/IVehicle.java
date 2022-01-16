@@ -1,8 +1,11 @@
 package lesson19.dto;
 
+import lesson19.DefaultValue;
+
 public interface IVehicle {
 
     double getWidth();
-    double getHeigth();
+    Double getHeigth();
+    String getMarkAndModel(Integer digit);
 
 }

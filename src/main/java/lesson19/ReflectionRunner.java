@@ -13,7 +13,7 @@ public class ReflectionRunner {
 
     @SuppressWarnings({"deprecation", "rawtypes"})
     public static void main(String[] args) throws Exception {
-        Object car = new Car("Skoda", "Octavia", 1.6d, 1d);
+        Object car = new Car("Skoda", "Octavia", 1.6d);
         Class<?> aClass = car.getClass();
         Class<Car> carClass = Car.class;
         Class thirdClass = Class.forName("lesson19.dto.Car");
