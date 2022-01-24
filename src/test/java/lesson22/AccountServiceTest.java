@@ -25,7 +25,7 @@ public class AccountServiceTest {
                 List.of(Account.builder()
                         .balance(BigDecimal.valueOf(1000))
                         .build()));
-        Mockito.verify(mock, Mockito.times(1)).getAccounts();
         Assert.assertEquals(BigDecimal.valueOf(1000), accountService.getMaxBalance(mock));
+        Mockito.verify(mock, Mockito.times(1)).getAccounts();
     }
 }
