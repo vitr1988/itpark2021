@@ -22,6 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <json.version>20140107</json.version>
         <mockito-core.version>2.28.2</mockito-core.version>
+        <mysql-connector-java.version>8.0.26</mysql-connector-java.version>
     </properties>
 
     <dependencies>
@@ -66,6 +67,11 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>${json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
