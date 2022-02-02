@@ -23,6 +23,9 @@
         <json.version>20140107</json.version>
         <mockito-core.version>2.28.2</mockito-core.version>
         <mysql-connector-java.version>8.0.26</mysql-connector-java.version>
+        <hibernate-core.version>5.4.32.Final</hibernate-core.version>
+
+        <spring-context.version>5.3.15</spring-context.version>
     </properties>
 
     <dependencies>
@@ -72,6 +75,16 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-context.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
