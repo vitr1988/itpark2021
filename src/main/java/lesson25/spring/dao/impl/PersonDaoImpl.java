@@ -1,9 +1,9 @@
 package lesson25.spring.dao.impl;
 
 import lesson25.spring.dao.PersonDao;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-//@Component
+@Repository
 public class PersonDaoImpl implements PersonDao {
 
     @Override
