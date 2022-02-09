@@ -4,6 +4,8 @@ import lesson26.AccountService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.math.BigDecimal;
 
 @Service
@@ -32,10 +34,10 @@ public class AnotherAccountService implements AccountService {
         return null;
     }
 
-//    @PreDestroy
-//    public void destroy() {}
+    @PreDestroy
+    public void destroy() {}
 
-//    @PostConstruct
-//    public void init() {}
+    @PostConstruct
+    public void init() {}
 
 }
