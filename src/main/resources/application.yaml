@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: local
+
+  application:
+    name: itpark-app
+#  main:
+#    banner-mode: 'off'
+
+#app:
+#  foodService:
+#    enabled: 1
