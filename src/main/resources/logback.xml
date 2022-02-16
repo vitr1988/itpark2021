@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="5 seconds" debug="true">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <springProperty scope="context" name="SPRING_APP_NAME" source="spring.application.name"/>
+    <property name="APPLICATION_NAME"
+              value="${SPRING_APP_NAME:-itpark}"/>
+
+    <include resource="logback-common.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="lesson29.shell" level="TRACE"/>
+</configuration>

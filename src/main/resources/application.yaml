@@ -1,9 +1,36 @@
 spring:
+  main:
+    allow-circular-references: true # without that cannot start spring shell
+
   profiles:
     active: local
 
   application:
     name: itpark-app
+#    titleAndBanner: 'New title for application'
+    title-and-banner: 'New title for application'
+
+  messages:
+    basename: messages # i18n.messages
+
+  datasource:
+    url: &dbUrl jdbc:mysql://localhost:3306/db
+    username: user
+    password: password
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+application:
+  value: 12
+  setting:
+    name: *dbUrl
+    file: 'classpath:/file.txt'
+    locale: ru
+    lines:
+      - Тут был текст
+      - И здесь должен быть текст
+      - Финальный текст
+
+
 #  main:
 #    banner-mode: 'off'
 
