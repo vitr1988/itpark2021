@@ -19,6 +19,26 @@ spring:
     password: password
     driverClassName: com.mysql.cj.jdbc.Driver
 
+  jpa:
+    generate-ddl: false
+    hibernate:
+      #validate: validate the schema, makes no changes to the database.
+      #update: update the schema.
+      #create: creates the schema, destroying previous data.
+      #create-drop: drop the schema at the end of the session
+      #none: is all other cases.
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        default_schema: db
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  liquibase:
+    change-log: 'classpath:db/migrations/changeLog.xml'
+
 application:
   value: 12
   setting:
