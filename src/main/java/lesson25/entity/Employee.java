@@ -1,9 +1,11 @@
 package lesson25.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,6 +16,7 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @Table(name = "employee")
+@ToString(exclude = "department")
 public class Employee {
 
     @Id
@@ -26,7 +29,7 @@ public class Employee {
 
     private BigDecimal salary;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
 }
