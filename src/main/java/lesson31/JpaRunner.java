@@ -34,6 +34,12 @@ public class JpaRunner {
             log.info("Сотрудник с департамента, идентификатор которого равен {}, {}", departmentId, employeeProjection.asString());
         });
 
-        employeeService.resetSalary(15);
+        employeeService.resetSalary(19);
+
+//        employeeService.updateEmployeeById(15, "Эрнст Неизвестный");
+
+        log.info("All Ivanovs: {}", employeeService.findAllByEmpName("Ivanov"));
+
+        log.info("All employees with department {}", employeeRepository.findAllWithDepartments());
     }
 }

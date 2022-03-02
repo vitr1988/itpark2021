@@ -9,12 +9,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,11 +59,32 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional//(propagation = Propagation.REQUIRES_NEW)
     public void updateDepartment(Integer employeeId, Integer departmentId) {
         employeeRepository.updateDepartmentForEmployee(
                 departmentRepository.getById(departmentId),
                 employeeId
         );
+    }
+
+    @Override
+    @Transactional
+    public void updateEmployeeById(Integer employeeId, String newName) {
+        employeeRepository.findById(employeeId)
+                .ifPresent(employee -> employee.setEmpName(newName));
+    }
+
+    @Override
+    public List<Employee> findAllByEmpName(String name) {
+        List<Employee> result = new ArrayList<>();
+        Pageable limit = PageRequest.of(0, 2);
+        Page<Employee> page;
+        do {
+            page = employeeRepository.findAllByEmpName(name, limit);
+            result.addAll(page.getContent());
+            limit = page.nextPageable();
+        } while(page.hasNext());
+
+        return result;
     }
 }

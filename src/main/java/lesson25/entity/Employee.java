@@ -10,14 +10,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+
+import static lesson25.entity.Employee.DEPARTMENT_GRAPH_NAME;
 
 @Data
 @Entity
 @Table(name = "employee")
 @ToString(exclude = "department")
+@NamedEntityGraph(name = DEPARTMENT_GRAPH_NAME, attributeNodes = {@NamedAttributeNode("department")})
 public class Employee {
+
+    public static final String DEPARTMENT_GRAPH_NAME = "Employee.department";
 
     @Id
     @Column(name = "emp_id")

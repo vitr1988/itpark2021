@@ -1,0 +1,7 @@
+#labelText {
+    float: left;
+}
+
+#errorLabel {
+    display: none;
+}

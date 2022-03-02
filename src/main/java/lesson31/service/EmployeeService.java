@@ -16,4 +16,8 @@ public interface EmployeeService {
     void resetSalary(Integer employeeId);
 
     void updateDepartment(Integer employeeId, Integer departmentId);
+
+    void updateEmployeeById(Integer employeeId, String newName);
+
+    List<Employee> findAllByEmpName(String name);
 }

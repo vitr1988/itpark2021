@@ -1,3 +1,8 @@
+server:
+  port: 8090 # default 8080
+#  servlet:
+#    context-path: /myProject
+
 spring:
   main:
     allow-circular-references: true # without that cannot start spring shell
