@@ -40,6 +40,6 @@ public class JpaRunner {
 
         log.info("All Ivanovs: {}", employeeService.findAllByEmpName("Ivanov"));
 
-        log.info("All employees with department {}", employeeRepository.findAllWithDepartments());
+        log.info("All employees with department {}", employeeRepository.findAllWithDepartmentsByDepartmentId(1));
     }
 }

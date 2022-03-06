@@ -59,5 +59,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findAllWithDepartment();
 
     @EntityGraph(value = DEPARTMENT_GRAPH_NAME, type = EntityGraph.EntityGraphType.LOAD)
-    List<Employee> findAllWithDepartments();
+//    @EntityGraph(attributePaths = "department")
+    List<Employee> findAllWithDepartmentsByDepartmentId(Integer departmentId);
 }
