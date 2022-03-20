@@ -24,6 +24,9 @@ $(function () {
             type: 'POST',
             success: function (result) {
                 $('#result').text('Результат расчета суммы: ' + result.value);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $('#result').text('Складывать значение большее 100 недопустимо!');
             }
         });
     });
