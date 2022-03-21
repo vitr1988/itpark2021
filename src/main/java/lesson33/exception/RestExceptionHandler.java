@@ -1,7 +1,7 @@
 package lesson33.exception;
 
-import lesson34.dto.error.ErrorType;
-import lesson34.dto.error.RestApiErrorDto;
+import lesson33.dto.error.ErrorType;
+import lesson33.dto.error.RestApiErrorDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.BeanCreationException;

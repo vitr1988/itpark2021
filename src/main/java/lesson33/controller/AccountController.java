@@ -1,6 +1,6 @@
 package lesson33.controller;
 
-import lesson34.dto.AccountDto;
+import lesson33.dto.AccountDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
