@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add/Edit/View genre</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/css/style.css"/>
+</head>
+<body>
+<form id="add-form" th:action="@{/genre/save}" th:if="${genre == null}" method="post" action="genre.html">
+    <p><strong>Add new genre:</strong></p>
+
+    <div class="row">
+        <label for="code-input">Code:</label>
+        <input id="code-input" name="code" type="text" required="required" maxlength="3"/>
+    </div>
+
+    <div class="row">
+        <label for="name-input">Name:</label>
+        <input id="name-input" name="name" type="text" required="required" maxlength="120" />
+    </div>
+
+    <div class="row">
+        <a th:href="@{/genres}" href="genres.html"><img alt="Back" th:src="@{/images/back.png}"/></a>
+        <button type="submit">Save</button>
+    </div>
+</form>
+<form id="edit-form" th:action="@{/genre/save(code=${genre.code})}" th:unless="${genre == null}" method="post"
+      action="genre.html" th:object="${genre}">
+    <p><strong>Genre Info:</strong></p>
+
+    <div class="row">
+        <label for="code-input">Code:</label>
+        <input id="code-input" type="text" th:value="*{code}" readonly="readonly" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="name-input">Name:</label>
+        <input id="name-input" name="name" type="text" th:value="*{name}" required="required" maxlength="120" value="Art"/>
+    </div>
+
+    <div class="row">
+        <a th:href="@{/genres}" href="genres.html"><img alt="Back" th:src="@{/images/back.png}"/></a>
+        <button type="submit"><img alt="Save" th:src="@{/images/save.png}"/></button>
+    </div>
+</form>
+</body>
+</html>

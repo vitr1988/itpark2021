@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all genres</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="css/style.css">
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("a[id^='genre']").click(function (event) {
+                if (confirm('Are you sure to delete this genre?')) {
+                    let genreCode = $(this).attr('name').replace('genre_', '');
+                    $.ajax({
+                        url: '/genres/' + genreCode,
+                        type: 'DELETE',
+                        success: function (result) {
+                            if (result.success) {
+                                location.href = '/genres';
+                            }
+                        }
+                    });
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+<body>
+<p><strong>Genres:</strong></p>
+
+<div id="navigation">
+    <a th:if="${genres.hasPrevious}" th:href="@{/genres(page=${genres.currentPage-1})}" href="genres.html"><img
+            alt="Previous page" th:src="@{/images/previous.png}"/></a>
+    Current page <span th:text="${genres.currentPage + 1}">0</span> of <span th:text="${genres.totalPage}">2</span>
+    <a th:if="${genres.hasNext}" th:href="@{/genres(page=${genres.currentPage + 1})}" href="genres.html"><img
+            alt="Next page" th:src="@{/images/next.png}"/></a>
+</div>
+<table class="genres">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="genre: ${genres.data}">
+        <td th:text="${genre.code}">art</td>
+        <td th:text="${genre.name}">Art</td>
+        <td>
+            <a th:href="@{/genre/edit(code=${genre.code})}" href="genre.html"><img alt="Edit"
+                                                                                   th:src="@{/images/edit.png}"/></a>
+            <a id="delete-handler" th:id="${genre.codeStr}" th:name="${genre.codeStr}" href="book.html"><img
+                    alt="Delete" th:src="@{/images/delete.png}"/></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div id="toolbar">
+    <a th:href="@{/}" href="../index.html"><img alt="Back" th:src="@{/images/back.png}"/></a>
+    <a th:href="@{/genre/add}" href="genre.html"><img alt="Add" th:src="@{/images/add.png}"/></a>
+</div>
+</body>
+</html>
