@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Конвертер валют</title>
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/currency.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+<body>
+    <h1>Конвертер валют</h1>
+    <div>
+        <div>
+            <label for="currencyValue">Введите нужную сумму: </label>
+        </div>
+        <div>
+            <input id="currencyValue" type="text" required="required"/>
+        </div>
+        <div>
+            <button id="calculateButton">Расчитать</button>
+        </div>
+    </div>
+    <span id="result">Расчетов не производилось</span>
+</body>
+</html>

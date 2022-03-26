@@ -55,6 +55,8 @@ application:
       - И здесь должен быть текст
       - Финальный текст
 
+  cbr:
+    location: https://www.cbr-xml-daily.ru/daily_json.js
 
 #  main:
 #    banner-mode: 'off'
