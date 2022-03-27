@@ -58,6 +58,15 @@ application:
   cbr:
     location: https://www.cbr-xml-daily.ru/daily_json.js
 
+springdoc:
+  packagesToScan: lesson36.controller
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
 #  main:
 #    banner-mode: 'off'
 

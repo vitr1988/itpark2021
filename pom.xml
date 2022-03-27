@@ -33,6 +33,7 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mapstruct.defaulComponentModel>spring</mapstruct.defaulComponentModel>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
     </properties>
 
     <parent>
@@ -160,6 +161,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc-openapi-ui.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
