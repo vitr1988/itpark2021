@@ -37,23 +37,23 @@
 </div>
 <table class="genres">
     <thead>
-    <tr>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Actions</th>
-    </tr>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
     </thead>
     <tbody>
-    <tr th:each="genre: ${genres.data}">
-        <td th:text="${genre.code}">art</td>
-        <td th:text="${genre.name}">Art</td>
-        <td>
-            <a th:href="@{/genre/edit(code=${genre.code})}" href="genre.html"><img alt="Edit"
-                                                                                   th:src="@{/images/edit.png}"/></a>
-            <a id="delete-handler" th:id="${genre.codeStr}" th:name="${genre.codeStr}" href="book.html"><img
-                    alt="Delete" th:src="@{/images/delete.png}"/></a>
-        </td>
-    </tr>
+        <tr th:each="genre: ${genres.data}">
+            <td th:text="${genre.code}">art</td>
+            <td th:text="${genre.name}">Art</td>
+            <td>
+                <a th:href="@{/genre/edit(code=${genre.code})}" href="genre.html"><img alt="Edit"
+                                                                                       th:src="@{/images/edit.png}"/></a>
+                <a id="delete-handler" th:id="${genre.codeStr}" th:name="${genre.codeStr}" href="book.html"><img
+                        alt="Delete" th:src="@{/images/delete.png}"/></a>
+            </td>
+        </tr>
     </tbody>
 </table>
 <div id="toolbar">
