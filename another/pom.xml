@@ -33,6 +33,7 @@
         <mapstruct.defaulComponentModel>spring</mapstruct.defaulComponentModel>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
+        <common-dto.version>1.0.0</common-dto.version>
     </properties>
 
     <parent>
@@ -73,6 +74,11 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.itpark</groupId>
+            <artifactId>common-dto</artifactId>
+            <version>${common-dto.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>

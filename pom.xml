@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>common-dto</module>
         <module>base</module>
         <module>another</module>
     </modules>

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import tech.park.CommonDto;
 
 import java.util.Map;
 
@@ -27,5 +28,15 @@ public class RestTemplateController {
                 .path("/test")
                 .queryParam("initiator", applicationName)
                 .build(Map.of()), String.class);
+    }
+
+    @GetMapping("/common")
+    public String getCommonData() {
+        return restTemplate.getForObject(UriComponentsBuilder.newInstance()
+                .scheme("http")
+                .host("localhost")
+                .port(8080)
+                .path("/common")
+                .build(Map.of()), CommonDto.class).getName();
     }
 }
