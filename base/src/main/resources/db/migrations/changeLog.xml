@@ -7,5 +7,6 @@
     <include file="schema.xml" relativeToChangelogFile="true"/>
     <include file="data.xml" relativeToChangelogFile="true"/>
     <include file="schemaHw30.xml" relativeToChangelogFile="true"/>
+    <include file="security.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
