@@ -35,6 +35,7 @@
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
         <common-dto.version>1.0.0</common-dto.version>
+        <nimbus-jose-jwt.version>9.10</nimbus-jose-jwt.version>
     </properties>
 
     <parent>
@@ -164,6 +165,10 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
+        <dependency>
             <groupId>tech.itpark</groupId>
             <artifactId>common-dto</artifactId>
             <version>${common-dto.version}</version>
@@ -189,6 +194,11 @@
             <artifactId>mockito-core</artifactId>
             <version>${mockito-core.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>${nimbus-jose-jwt.version}</version>
         </dependency>
     </dependencies>
 

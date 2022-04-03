@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<p th:text="#{welcome.intro}"></p>
+<p><strong>This is welcome page where you can navigate to another chapters. But, firstly, you should be <a th:href="@{/login}">logged into the System</a>. Choose any chapter to authorize.</strong></p>
 <menu>
     <ul>
         <li><a th:href="@{/genres}" href="/genres.html">Genres</a></li>

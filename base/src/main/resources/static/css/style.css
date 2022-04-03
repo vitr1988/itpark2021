@@ -24,3 +24,17 @@ body {
 #errorLabel {
     display: none;
 }
+
+.loginPanel {
+    position: absolute;
+    right: 5px;
+}
+
+.loginName {
+    padding-right: 5px;
+}
+
+.logoutButton {
+    float: right;
+    cursor: pointer;
+}

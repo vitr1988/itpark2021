@@ -1,64 +1,92 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>List of all genres</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" href="css/style.css">
-    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}" src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $(function () {
-            $("a[id^='genre']").click(function (event) {
-                if (confirm('Are you sure to delete this genre?')) {
-                    let genreCode = $(this).attr('name').replace('genre_', '');
-                    $.ajax({
-                        url: '/genres/' + genreCode,
-                        type: 'DELETE',
-                        success: function (result) {
-                            if (result.success) {
-                                location.href = '/genres';
-                            }
+            fillData();
+        });
+
+        function fillData(page) {
+            $.get('/api/genres' + (page ? '?page=' + page : ''), function (result) {
+                let rowsData = '';
+                for (let i = 0; i < result.data.length; i++) {
+                    let genre = result.data[i];
+                    var actionButton = '';
+                    if (result.admin) {
+                        actionButton =
+                            '<td>' +
+                            '<a href="/genre/edit?code=' + genre.code + '"><img title="Edit" src="/images/edit.png"/></a>' +
+                            '<a data-id="genre_' + genre.code + '" href="genre.html"><img title="Delete" src="/images/delete.png"/></a>' +
+                            '</td>'
+                    }
+                    rowsData += '<tr><td>' + genre.code + '</td>' +
+                        '<td>' + genre.name + '</td>' +
+                        actionButton +
+                        '</tr>';
+                }
+                let genreDataElement = $('#genreData');
+                genreDataElement.html(rowsData);
+                if (result.admin) {
+                    $('a[data-id^=genre_]').one('click', function (event) {
+                        if (confirm('Are you sure to delete this genre?')) {
+                            let genreCode = $(this).attr('data-id').replace('genre_', '');
+                            $.ajax({
+                                url: '/api/genres/' + genreCode,
+                                type: 'DELETE',
+                                success: function () {
+                                    location.href = '/genres';
+                                },
+                                error: function (jqXHR, exception) {
+                                    if (jqXHR.status === 403) {
+                                        alert('You have no right');
+                                    }
+                                }
+                            });
                         }
+                        event.preventDefault();
                     });
                 }
-                event.preventDefault();
+
+                $('#navigation').html(
+                    (result.hasPrevious ? ('<a href="javascript:fillData(' + (result.currentPage - 1) + ')">' +
+                        '<img title="Previous page" src="/images/previous.png"/>' +
+                        '</a>') : '') +
+                    'Current page <span>' + (result.currentPage + 1) + '</span> of <span>' + result.totalPage + '</span>' +
+                    (result.hasNext ?  ('<a href="javascript:fillData(' + (result.currentPage + 1) + ')">' +
+                        '<img title="Next page" src="/images/next.png"/>' +
+                        '</a>') : ''));
             });
-        });
+        }
     </script>
 </head>
 <body>
+<div class="loginPanel" sec:authorize="isAuthenticated()">
+    <span class="loginName" sec:authentication="name"></span>
+    <div class="logoutButton">
+        <a th:href="@{/logout}"><img title="Logout" th:src="@{/images/exit.png}"/></a>
+    </div>
+</div>
 <p><strong>Genres:</strong></p>
 
-<div id="navigation">
-    <a th:if="${genres.hasPrevious}" th:href="@{/genres(page=${genres.currentPage-1})}" href="genres.html"><img
-            alt="Previous page" th:src="@{/images/previous.png}"/></a>
-    Current page <span th:text="${genres.currentPage + 1}">0</span> of <span th:text="${genres.totalPage}">2</span>
-    <a th:if="${genres.hasNext}" th:href="@{/genres(page=${genres.currentPage + 1})}" href="genres.html"><img
-            alt="Next page" th:src="@{/images/next.png}"/></a>
-</div>
+<div id="navigation"></div>
 <table class="genres">
     <thead>
-        <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">Actions</th>
+    </tr>
     </thead>
-    <tbody>
-        <tr th:each="genre: ${genres.data}">
-            <td th:text="${genre.code}">art</td>
-            <td th:text="${genre.name}">Art</td>
-            <td>
-                <a th:href="@{/genre/edit(code=${genre.code})}" href="genre.html"><img alt="Edit"
-                                                                                       th:src="@{/images/edit.png}"/></a>
-                <a id="delete-handler" th:id="${genre.codeStr}" th:name="${genre.codeStr}" href="book.html"><img
-                        alt="Delete" th:src="@{/images/delete.png}"/></a>
-            </td>
-        </tr>
-    </tbody>
+    <tbody id="genreData"/>
 </table>
 <div id="toolbar">
-    <a th:href="@{/}" href="../index.html"><img alt="Back" th:src="@{/images/back.png}"/></a>
-    <a th:href="@{/genre/add}" href="genre.html"><img alt="Add" th:src="@{/images/add.png}"/></a>
+    <a th:href="@{/}" href="../index.html"><img title="Back" th:src="@{/images/back.png}"/></a>
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{/genre/add}" href="genre.html"><img title="Add" th:src="@{/images/add.png}"/></a>
 </div>
 </body>
 </html>
