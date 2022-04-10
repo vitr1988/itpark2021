@@ -1,0 +1,14 @@
+spring:
+  main:
+    banner-mode: 'off'
+  application:
+    name: library
+  messages:
+    basename: i18n.messages
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/library
+      database: library
+application:
+  nosql:
+    type: mongo

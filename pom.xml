@@ -13,6 +13,7 @@
         <module>common-dto</module>
         <module>base</module>
         <module>another</module>
+        <module>nosql</module>
     </modules>
 
     <properties>
