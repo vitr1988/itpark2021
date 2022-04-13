@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all genres</title>
+    <link rel="stylesheet" th:href="@{/styles/library.css}" href="styles/library.css">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}" src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            fillData();
+        });
+
+        function fillData(page) {
+            $.get('/api/genres' + (page ? '?page=' + page : ''), function (result) {
+                let rowsData = '';
+                for (let i = 0; i < result.length; i++) {
+                    let genre = result[i];
+                    rowsData += '<tr><td>' + genre.code + '</td>' +
+                        '<td>' + genre.name + '</td>' +
+                        '<td><a href="/genre/edit?code=' + genre.code + '"><img title="Edit" src="/images/edit.png"/></a>' +
+                        '<a data-id="genre_' + genre.code + '" href="genre.html"><img title="Delete" src="/images/delete.png"/></a>' +
+                        '</td></tr>';
+                }
+                let genreDataElement = $('#genreData');
+                genreDataElement.html(rowsData);
+                $('a[data-id^=genre_]').one('click', function (event) {
+                    if (confirm('Are you sure to delete this genre?')) {
+                        let genreCode = $(this).attr('data-id').replace('genre_', '');
+                        $.ajax({
+                            url: '/api/genres/' + genreCode,
+                            type: 'DELETE',
+                            success: function () {
+                                location.href = '/genres';
+                            }
+                        });
+                    }
+                    event.preventDefault();
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+<p><strong>Genres:</strong></p>
+
+<table class="genres">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="genreData"/>
+</table>
+<div id="toolbar">
+    <a th:href="@{/}" href="../index.html"><img title="Back" th:src="@{/images/back.png}"/></a>
+    <a th:href="@{/genre/add}" href="genre.html"><img title="Add" th:src="@{/images/add.png}"/></a>
+</div>
+</body>
+</html>

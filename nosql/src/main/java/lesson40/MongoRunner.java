@@ -1,5 +1,6 @@
 package lesson40;
 
+import com.github.cloudyrock.spring.v5.EnableMongock;
 import lesson40.dto.BookDto;
 import lesson40.dto.GenreDto;
 import lesson40.service.BookService;
@@ -10,6 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.UUID;
 
+@EnableMongock
 @SpringBootApplication
 public class MongoRunner {
 

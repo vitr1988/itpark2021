@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Welcome page</title>
+    <link rel="stylesheet" th:href="@{/styles/library.css}" href="/styles/library.css"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+<body>
+
+<p><strong>This is welcome page where you can navigate to another chapters:</strong></p>
+<menu>
+    <ul>
+        <li><a th:href="@{/genres}" href="/genres.html">Genres</a></li>
+    </ul>
+</menu>
+
+</body>
+</html>

@@ -12,3 +12,9 @@ spring:
 application:
   nosql:
     type: mongo
+
+mongock:
+  runner-type: "ApplicationRunner" # default
+  #runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - lesson40.migration

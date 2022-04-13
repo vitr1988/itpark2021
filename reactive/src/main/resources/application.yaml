@@ -1,0 +1,24 @@
+spring:
+  main:
+    banner-mode: 'off'
+  application:
+    name: library
+  data:
+    mongodb:
+      database: library
+      port: 27017
+      host: localhost
+#      uri: mongodb://localhost:27017/library?replicaSet=test&connectTimeoutMS=120000
+#      replicaSet=rs0&readPreference=primaryPreferred&retryWrites=false&maxIdleTimeMS=30000
+
+application:
+  locale: ru
+
+server:
+  port: 9090
+
+mongock:
+  runner-type: "ApplicationRunner" # default
+  #runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - lesson41.migration
