@@ -1,0 +1,10 @@
+spring:
+  main:
+    banner-mode: 'off'
+  data:
+    mongodb:
+      database: library-test
+
+application:
+  nosql:
+    type: mongo

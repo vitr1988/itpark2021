@@ -1,0 +1,7 @@
+spring:
+  main:
+    banner-mode: 'off'
+  data:
+    mongodb:
+      database: library-test
+  mongodb.embedded.version: 3.5.5

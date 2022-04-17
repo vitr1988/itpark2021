@@ -15,6 +15,7 @@
         <module>another</module>
         <module>nosql</module>
         <module>reactive</module>
+        <module>batch</module>
     </modules>
 
     <properties>

@@ -1,0 +1,89 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Vitalii Ivanov" id="Create-table-genre">
+        <preConditions>
+            <not>
+                <tableExists tableName="GENRE"/>
+            </not>
+        </preConditions>
+        <createTable tableName="GENRE">
+            <column name="CODE" type="VARCHAR(3)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Vitalii Ivanov" id="Create-table-author">
+        <preConditions>
+            <not>
+                <tableExists tableName="AUTHOR"/>
+            </not>
+        </preConditions>
+        <createTable tableName="AUTHOR">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Vitalii Ivanov" id="Create-table-book">
+        <preConditions>
+            <not>
+                <tableExists tableName="BOOK"/>
+            </not>
+        </preConditions>
+        <createTable tableName="BOOK">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ISBN" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AUTHOR_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_BOOK_AUTHOR"
+                             references="AUTHOR(ID)"/>
+            </column>
+            <column name="GENRE_CODE" type="VARCHAR(3)">
+                <constraints nullable="false" foreignKeyName="FK_BOOK_GENRE"
+                             references="GENRE(CODE)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Vitalii Ivanov" id="Create-table-comment">
+        <preConditions>
+            <not>
+                <tableExists tableName="COMMENT"/>
+            </not>
+        </preConditions>
+        <createTable tableName="COMMENT">
+            <column name="ID" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="TEXT" type="VARCHAR(4000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BOOK_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_COMMENT_BOOK"
+                             references="BOOK(ID)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

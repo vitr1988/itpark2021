@@ -1,0 +1,33 @@
+spring:
+  main:
+    banner-mode: 'off'
+    allow-circular-references: true
+  application:
+    name: library
+  datasource:
+    url: jdbc:mysql://localhost:3306/db
+    username: user
+    password: password
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.MySQL8Dialect
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+    properties:
+      hibernate:
+        default_schema: db
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/library
+  liquibase:
+    change-log: 'classpath:db/migration/changeLog.xml'
+application:
+  locale: ru
+
+#logging:
+#  level:
+#    root: ERROR

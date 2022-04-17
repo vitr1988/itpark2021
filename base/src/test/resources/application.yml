@@ -1,0 +1,19 @@
+spring:
+  main:
+    banner-mode: 'off'
+  datasource:
+    url: jdbc:h2:mem:testdb
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      dialect: org.hibernate.dialect.H2Dialect
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  shell:
+    interactive:
+      enabled: false
+  liquibase:
+#    enabled: false
+    change-log: 'classpath:db-scripts/changeLog.xml'
