@@ -1,0 +1,52 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Vitalii Ivanov" id="Populate-table-genre">
+        <sqlFile relativeToChangelogFile="true" path="genre-data.sql" />
+    </changeSet>
+
+    <changeSet author="Vitalii Ivanov" id="Populate-table-author-and-book">
+        <insert tableName="AUTHOR">
+            <!-- Id is auto incremented -->
+            <column name="FIRST_NAME" value="Александра" />
+            <column name="LAST_NAME" value="Маринина" />
+        </insert>
+
+        <insert tableName="BOOK">
+            <column name="ISBN" value="978-5-699-92018-1" />
+            <column name="NAME" value="Чувство льда" />
+            <column name="AUTHOR_ID" valueComputed="(SELECT MAX(ID) FROM AUTHOR)" />
+            <column name="GENRE_CODE" value="det" />
+        </insert>
+
+        <insert tableName="AUTHOR">
+            <!-- Id is auto incremented -->
+            <column name="FIRST_NAME" value="Фёдор" />
+            <column name="LAST_NAME" value="Достоевский" />
+        </insert>
+
+        <insert tableName="BOOK">
+            <column name="ISBN" value="5-352-00044-3" />
+            <column name="NAME" value="Бесы" />
+            <column name="AUTHOR_ID" valueComputed="(SELECT MAX(ID) FROM AUTHOR)" />
+            <column name="GENRE_CODE" value="rom" />
+        </insert>
+
+        <insert tableName="AUTHOR">
+            <!-- Id is auto incremented -->
+            <column name="FIRST_NAME" value="Николай" />
+            <column name="LAST_NAME" value="Гоголь" />
+        </insert>
+
+        <insert tableName="BOOK">
+            <column name="ISBN" value="978-5-4335-0634-3" />
+            <column name="NAME" value="Тарас Бульба" />
+            <column name="AUTHOR_ID" valueComputed="(SELECT MAX(ID) FROM AUTHOR)" />
+            <column name="GENRE_CODE" value="pov" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

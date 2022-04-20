@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all genres</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="css/style.css">
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}" src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            fillData();
+        });
+
+        function fillData(page) {
+            $.get('/api/genres', function (result) {
+                let rowsData = '';
+                for (let i = 0; i < result._embedded.genres.length; i++) {
+                    let genre = result._embedded.genres[i];
+                    var actionButton =
+                        '<td>' +
+                        '<a href="/genre/edit?code=' + genre.code + '"><img title="Edit" src="/images/edit.png"/></a>' +
+                        '<a data-id="genre_' + genre.code + '" href="genre.html"><img title="Delete" src="/images/delete.png"/></a>' +
+                        '</td>';
+
+                    rowsData += '<tr><td>' + genre.code + '</td>' +
+                        '<td>' + genre.name + '</td>' +
+                        actionButton +
+                        '</tr>';
+                }
+                let genreDataElement = $('#genreData');
+                genreDataElement.html(rowsData);
+
+                $('a[data-id^=genre_]').one('click', function (event) {
+                    if (confirm('Are you sure to delete this genre?')) {
+                        let genreCode = $(this).attr('data-id').replace('genre_', '');
+                        $.ajax({
+                            url: '/api/genres/' + genreCode,
+                            type: 'DELETE',
+                            success: function () {
+                                location.href = '/genres';
+                            },
+                            error: function (jqXHR, exception) {
+                                if (jqXHR.status === 403) {
+                                    alert('You have no right');
+                                }
+                            }
+                        });
+                    }
+                    event.preventDefault();
+                });
+
+
+                $('#navigation').html(
+                    (result.hasPrevious ? ('<a href="javascript:fillData(' + (result.currentPage - 1) + ')">' +
+                        '<img title="Previous page" src="/images/previous.png"/>' +
+                        '</a>') : '') +
+                    'Current page <span>' + (result.page.number + 1) + '</span> of <span>' + result.page.totalPages + '</span>' +
+                    (result.hasNext ? ('<a href="javascript:fillData(' + (result.currentPage + 1) + ')">' +
+                        '<img title="Next page" src="/images/next.png"/>' +
+                        '</a>') : ''));
+            });
+        }
+    </script>
+</head>
+<body>
+<p><strong>Genres:</strong></p>
+
+<div id="navigation"></div>
+<table class="genres">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="genreData"/>
+</table>
+<div id="toolbar">
+    <a th:href="@{/}" href="../index.html"><img title="Back" th:src="@{/images/back.png}"/></a>
+    <a th:href="@{/genre/add}" href="genre.html"><img title="Add" th:src="@{/images/add.png}"/></a>
+</div>
+</body>
+</html>

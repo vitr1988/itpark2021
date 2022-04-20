@@ -16,6 +16,7 @@
         <module>nosql</module>
         <module>reactive</module>
         <module>batch</module>
+	    <module>spring-data-rest</module>
     </modules>
 
     <properties>

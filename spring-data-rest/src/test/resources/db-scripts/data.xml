@@ -1,0 +1,37 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Vitalii Ivanov" id="Populate-table-genre">
+        <sqlFile relativeToChangelogFile="true" path="genre-data.sql" />
+    </changeSet>
+
+    <changeSet author="Vitalii Ivanov" id="Populate-table-author-and-book">
+        <insert tableName="AUTHOR">
+            <!-- Id is auto incremented -->
+            <column name="FIRST_NAME" value="Ильдар" />
+            <column name="LAST_NAME" value="Хабибулин" />
+        </insert>
+
+        <insert tableName="BOOK">
+            <column name="ISBN" value="978-5-94147-573-2" />
+            <column name="NAME" value="Самоучитель Java 2" />
+            <column name="AUTHOR_ID" valueComputed="(SELECT MAX(ID) FROM AUTHOR)" />
+            <column name="GENRE_CODE" value="com" />
+        </insert>
+
+        <insert tableName="COMMENT">
+            <column name="TEXT" value="Лучшая книга, которую я читал" />
+            <column name="BOOK_ID" valueComputed="(SELECT MAX(ID) FROM BOOK)" />
+        </insert>
+
+        <insert tableName="AUTHOR">
+            <!-- Id is auto incremented -->
+            <column name="FIRST_NAME" value="Крейг" />
+            <column name="LAST_NAME" value="Уолс" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
