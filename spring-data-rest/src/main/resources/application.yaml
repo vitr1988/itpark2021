@@ -37,7 +37,7 @@ management:
     web:
       exposure:
         include: "*"
-#        include: "health, info, metric, prometheus"
+#        include: "health, info, metrics, prometheus"
   endpoint:
     health:
       show-details: always
