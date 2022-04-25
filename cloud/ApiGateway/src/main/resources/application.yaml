@@ -1,0 +1,53 @@
+spring:
+  main:
+    banner-mode: 'off'
+  application:
+    name: ApiGateway
+  cloud:
+    gateway:
+      routes:
+        - id: account_route
+          uri: lb://AccountService
+          predicates:
+            - Path=/account/**
+          filters:
+            - StripPrefix=1
+        - id: client_route
+          uri: lb://ClientService
+          predicates:
+            - Path=/client/**
+          filters:
+            - StripPrefix=1
+        - id: card_route
+          uri: lb://CardService
+          predicates:
+            - Path=/card/**
+          filters:
+            - StripPrefix=1
+        - id: processing_route
+          uri: lb://ProcessingService
+          predicates:
+            - Path=/processing/**
+          filters:
+            - StripPrefix=1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+
+server:
+  port: 9090
+
+management:
+  endpoints.web.exposure.include: 'gateway, prometheus, metrics, info, health, env'
+  metrics.export.prometheus.enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+
+logging:
+  level:
+    root: DEBUG

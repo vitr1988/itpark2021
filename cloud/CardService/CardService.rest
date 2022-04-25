@@ -1,0 +1,2 @@
+### Generate card number
+GET http://localhost:8803/create

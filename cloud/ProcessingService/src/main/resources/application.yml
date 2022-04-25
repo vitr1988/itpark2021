@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: ProcessingService
+  main:
+    banner-mode: 'off'
+  sleuth:
+    sampler:
+      probability: 1
+  zipkin:
+    sender.type: rabbit
+    rabbitmq.queue: zipkin
+
+server:
+  port: 8804
+
+spring.datasource:
+  url: jdbc:h2:file:~/ProcessingService;DB_CLOSE_ON_EXIT=FALSE
+  driverClassName: org.h2.Driver
+  username: sa
+  password:
+
+spring.jpa:
+  open-in-view: false
+  database-platform: org.hibernate.dialect.H2Dialect
+  hibernate.ddl-auto: create-drop
+  generate-ddl: true
+  properties.hibernate.hbm2ddl.auto: create-drop
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+
+management:
+  endpoints.web.exposure.include: 'prometheus, metrics, info, health, env'
+  metrics.export.prometheus.enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true

@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: CardService
+  main:
+    banner-mode: 'off'
+  sleuth:
+    sampler:
+      probability: 0.2
+  zipkin:
+    sender.type: rabbit
+    rabbitmq.queue: zipkin
+
+server:
+  port: 8803
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+
+management:
+  endpoints.web.exposure.include: 'prometheus, metrics, info, health, env'
+  metrics.export.prometheus.enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true

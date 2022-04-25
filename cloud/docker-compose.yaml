@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      cloud_network:
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    restart: on-failure
+    ports:
+      - 9411:9411
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      - rabbitmq
+    networks:
+      cloud_network:
+
+networks:
+  cloud_network:

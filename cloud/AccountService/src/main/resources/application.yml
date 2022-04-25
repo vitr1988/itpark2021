@@ -1,0 +1,96 @@
+spring:
+  application:
+    name: AccountService
+  main:
+    banner-mode: 'off'
+  sleuth:
+    sampler:
+      probability: 1
+  zipkin:
+    sender.type: rabbit
+    rabbitmq.queue: zipkin
+
+server:
+  port: 8802
+
+spring.datasource:
+  url: jdbc:h2:file:~/AccountService;DB_CLOSE_ON_EXIT=FALSE
+  driverClassName: org.h2.Driver
+  username: sa
+  password:
+
+spring.jpa:
+  open-in-view: false
+  database-platform: org.hibernate.dialect.H2Dialect
+  hibernate.ddl-auto: create-drop
+  generate-ddl: true
+  properties.hibernate.hbm2ddl.auto: create-drop
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+
+resilience4j.circuitbreaker:
+  instances:
+    backendA:
+      registerHealthIndicator: true
+      slidingWindowSize: 100
+    backendB:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      waitDurationInOpenState: 50s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+
+resilience4j.retry:
+  instances:
+    account:
+      maxAttempts: 3
+      waitDuration: 10s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - java.lang.IllegalArgumentException
+
+resilience4j.bulkhead:
+  instances:
+    account:
+      maxWaitDuration: 10ms
+      maxConcurrentCalls: 10
+
+resilience4j.thread-pool-bulkhead:
+  instances:
+    account:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
+
+resilience4j.ratelimiter:
+  instances:
+    account:
+      limitForPeriod: 10
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0
+      registerHealthIndicator: true
+      eventConsumerBufferSize: 100
+
+resilience4j.timelimiter:
+  instances:
+    account:
+      timeoutDuration: 2s
+      cancelRunningFuture: true
+
+management:
+  endpoints.web.exposure.include: 'prometheus, metrics, info, health, env'
+  metrics.export.prometheus.enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true

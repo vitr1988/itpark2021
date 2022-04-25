@@ -1,0 +1,25 @@
+#####################################################################
+# Now we use Processing Service for account operations
+#####################################################################
+
+### Generate credit card
+GET http://localhost:8804/issue/1
+Accept: application/json
+
+### Generate credit card (via ApiGateway)
+GET http://localhost:9090/processing/issue/1
+Accept: application/json
+
+### Spend some money
+GET http://localhost:8804/checkout/9989080447497643?sum=300
+
+### Spend some money (via ApiGateway)
+GET http://localhost:9090/processing/checkout/2855336105862353?sum=100
+
+### Retrieve card number for the account
+GET http://localhost:8804/get?account_id=1
+
+### Retrieve card number for the account (via ApiGateway)
+GET http://localhost:9090/processing/get?account_id=1
+
+

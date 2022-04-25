@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: Eureka
+  main:
+    banner-mode: 'off'
+
+server:
+  port: 8762
+
+eureka:
+  instance:
+    prefer-ip-address: true
+#    ip-address: 127.0.0.1
+  server:
+    enable-self-preservation: false
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoints.web.exposure.include: 'prometheus, metrics, info, health, env'
+  metrics.export.prometheus.enabled: true
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
